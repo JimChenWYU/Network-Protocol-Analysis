@@ -33,8 +33,14 @@
    //硬件类型：   0001（以太网）
    //......
    //目的IP:      C0A80002(192.168.0.2)
-  
-  }
+
+   //strcpy((char* )eheader.ether_dhost, Ether_Dhost(prodat));
+   strcpy((char* )eheader.ether_shost, Ether_Shost(prodat));
+
+   printf("%s\n", eheader.ether_shost);
+   //Ether_Shost(prodat);
+
+}
 
 
 

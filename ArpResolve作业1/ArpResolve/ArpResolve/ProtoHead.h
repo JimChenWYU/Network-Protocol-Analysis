@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #define  IP_PROTO    0X0800
 #define  ARP_PROTO   0X0806
 
@@ -22,3 +24,24 @@ struct arp_header
  unsigned char arp_destination_ip_address[4];          /*Ä¿µÄIPµØÖ·*/
 };
 
+char* Ether_Dhost(char* prodat)
+{
+	char ether_dhost[13];
+	for(int i = 0; i < 12; i++) {
+		ether_dhost[i] = prodat[i];
+	}
+	ether_dhost[12] = '\0';
+	return ether_dhost;
+}
+
+
+char* Ether_Shost(char* prodat)
+{
+	char ether_shost[13];
+	for(int i = 12; i < 24; i++) {
+		ether_shost[i - 12] = prodat[i];
+	}
+	ether_shost[12] = '\0';
+	printf("%s\n", ether_shost);
+	return ether_shost;
+}
