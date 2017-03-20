@@ -2,8 +2,11 @@
   #include "memory.h"
   #include "ProtoHead.h"
   #include "stdio.h"
-  #include "stdlib.h"
-  
+#include "stdlib.h"
+#include <iostream>	  
+#include <string>
+
+using namespace std;
   void main()
   {
   char prodat[1600];
@@ -34,11 +37,11 @@
    //......
    //Ä¿µÄIP:      C0A80002(192.168.0.2)
 
-   //strcpy((char* )eheader.ether_dhost, Ether_Dhost(prodat));
-   strcpy((char* )eheader.ether_shost, Ether_Shost(prodat));
+   int current_index = 0;
 
-   printf("%s\n", eheader.ether_shost);
-   //Ether_Shost(prodat);
+
+   cout<<(char) combineTwoChar('f', 'f');
+   
 
 }
 

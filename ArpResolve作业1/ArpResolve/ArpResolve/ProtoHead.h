@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 #define  IP_PROTO    0X0800
 #define  ARP_PROTO   0X0806
@@ -24,9 +28,11 @@ struct arp_header
  unsigned char arp_destination_ip_address[4];          /*目的IP地址*/
 };
 
-char* Ether_Dhost(char* prodat)
+// 目的Mac地址获取
+string Ether_Dhost(char *prodat)
 {
-	char ether_dhost[13];
+	string ether_dhost;
+	ether_dhost.resize(13);
 	for(int i = 0; i < 12; i++) {
 		ether_dhost[i] = prodat[i];
 	}
@@ -34,14 +40,42 @@ char* Ether_Dhost(char* prodat)
 	return ether_dhost;
 }
 
-
-char* Ether_Shost(char* prodat)
+//源Mac地址获取 
+string Ether_Shost(char *prodat)
 {
-	char ether_shost[13];
+
+	string ether_shost;
+	ether_shost.resize(13);
 	for(int i = 12; i < 24; i++) {
 		ether_shost[i - 12] = prodat[i];
 	}
 	ether_shost[12] = '\0';
-	printf("%s\n", ether_shost);
 	return ether_shost;
+}
+
+short *Ether_Type(char *prodat)
+{
+	short *ether_type = new short[5];
+	for (int i = 24; i < 28; i++) {
+		ether_type[i - 24] = prodat[i];
+	}
+	ether_type[4] = '\0';
+	return ether_type;
+}
+
+// 转换
+int convert(char c)
+{
+	int result;
+	if (c > 'a') {
+		result = c - 'a' + 10;
+	} else {
+		result = c - 0;
+	}
+	return result;	
+}
+
+char combineTwoChar(char c1, char c2)
+{
+	return ((convert(c1) << 4) | convert(c2));
 }
