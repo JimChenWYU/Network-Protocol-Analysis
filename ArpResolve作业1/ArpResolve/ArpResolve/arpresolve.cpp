@@ -37,17 +37,32 @@ using namespace std;
    //......
    //Ä¿µÄIP:      C0A80002(192.168.0.2)
 
-   int current_index = 0;
+	int current_index = 0;
 
-
-   cout<<(char) combineTwoChar('f', 'f');
+	for(int i = 0; i < 6; i++) {
+		eheader.ether_dhost[i] = combineTwoChar(prodat[current_index], prodat[current_index+1]);
+		current_index += 2;
+	}
    
+	for(int i = 0; i < 6; i++) {
+		eheader.ether_shost[i] = combineTwoChar(prodat[current_index], prodat[current_index+1]);
+		current_index += 2;
+	}
+
+	eheader.ether_type = combineTwoChar(prodat[current_index], prodat[current_index+1])<<8;
+	//printf("%04X \n", convert(prodat[current_index]));
+	//printf("%04X \n", convert(prodat[current_index+1]));
+	current_index += 2;
+
+	eheader.ether_type = eheader.ether_type | combineTwoChar(prodat[current_index], prodat[current_index+1]);
+
+
+
+	print_mac(eheader.ether_dhost);
+	print_mac(eheader.ether_shost);
+	print_type(eheader.ether_type);
 
 }
-
-
-
-
 
 
 

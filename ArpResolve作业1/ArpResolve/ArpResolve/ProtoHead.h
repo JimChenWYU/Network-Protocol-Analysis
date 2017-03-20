@@ -28,54 +28,41 @@ struct arp_header
  unsigned char arp_destination_ip_address[4];          /*目的IP地址*/
 };
 
-// 目的Mac地址获取
-string Ether_Dhost(char *prodat)
-{
-	string ether_dhost;
-	ether_dhost.resize(13);
-	for(int i = 0; i < 12; i++) {
-		ether_dhost[i] = prodat[i];
-	}
-	ether_dhost[12] = '\0';
-	return ether_dhost;
-}
-
-//源Mac地址获取 
-string Ether_Shost(char *prodat)
-{
-
-	string ether_shost;
-	ether_shost.resize(13);
-	for(int i = 12; i < 24; i++) {
-		ether_shost[i - 12] = prodat[i];
-	}
-	ether_shost[12] = '\0';
-	return ether_shost;
-}
-
-short *Ether_Type(char *prodat)
-{
-	short *ether_type = new short[5];
-	for (int i = 24; i < 28; i++) {
-		ether_type[i - 24] = prodat[i];
-	}
-	ether_type[4] = '\0';
-	return ether_type;
-}
 
 // 转换
 int convert(char c)
 {
-	int result;
+	int result = 0;
 	if (c > 'a') {
 		result = c - 'a' + 10;
 	} else {
-		result = c - 0;
+		result = c - '0';
 	}
 	return result;	
 }
 
+// 合并
 char combineTwoChar(char c1, char c2)
 {
-	return ((convert(c1) << 4) | convert(c2));
+	return (convert(c1)<<4)|convert(c2);
+}
+
+//输出MAC格式
+void print_mac(unsigned char* cs) 
+{
+	for(int i = 0; i < 6; i++) 
+	{
+		if (i == 5) {
+			printf("%02X", cs[i]);
+		} else {
+			printf("%02X--", cs[i]);
+		}
+	}
+	printf("\n");
+}
+
+void print_type(unsigned short cs)
+{
+	printf("%04X", cs);
+	printf("\n");
 }
