@@ -34,3 +34,4 @@
 *.filters
 *.user
 /**/Debug/
+/**/ipch/
