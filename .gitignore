@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+*.sdf
+*.ipch
+*.vcxproj
+*.filters
+*.user
+/**/Debug/
