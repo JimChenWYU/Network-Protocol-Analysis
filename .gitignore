@@ -28,6 +28,7 @@
 *.out
 *.app
 
+*.suo
 *.sdf
 *.ipch
 *.vcxproj
