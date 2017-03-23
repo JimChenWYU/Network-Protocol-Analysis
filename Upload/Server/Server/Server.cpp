@@ -92,16 +92,33 @@ namespace server {
 
 	Server Server::Receive(void)
 	{
-		memset(tmp, 0, sizeof(tmp));
+		char recvName[512];
 		fstream fp;
 
-		fp.open(FILE_PATH, ios::trunc | ios::out | ios::binary);
+		memset(tmp, 0, sizeof(tmp));
+		memset(recvName, 0, sizeof(recvName));
+
+		iResult = recv(socketMsg, recvName, sizeof(recvName), 0);
+
+		if (iResult == SOCKET_ERROR) {
+			cout<<"接受出错！"<<endl;
+			closesocket(socketListen);
+			closesocket(socketMsg);
+			WSACleanup();
+			exit(-1);
+		}
+
+		// cout<<recvName<<endl;
+
+		fp.open(recvName, ios::trunc | ios::out | ios::binary);
 
 		if (fp.fail())
 		{
 			cout<<"初始化文件出错！"<<endl;
 			exit(-1);
 		}
+
+		cout<<"正在上传中..."<<endl;
 
 		while (true) {
 			iResult = recv(socketMsg, tmp, sizeof(tmp), 0);
@@ -116,7 +133,7 @@ namespace server {
 			}
 
 			if (iResult == 0) {
-				cout<<"传输完毕！"<<endl;
+				cout<<"上传完毕！"<<endl;
 				break;
 			}
 

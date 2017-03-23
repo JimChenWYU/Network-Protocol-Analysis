@@ -79,6 +79,10 @@ namespace client {
 				exit(-1);
 			}
 
+			// cout<<FILE_PATH<<" len: "<<sizeof(FILE_PATH)<<endl;
+
+			send(clientSocket, FILE_PATH, sizeof(FILE_PATH), 0);
+
 			int size = 0, len = 0;
 
 			while (! file.eof()) {

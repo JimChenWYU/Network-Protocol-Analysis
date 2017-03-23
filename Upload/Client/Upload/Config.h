@@ -1,8 +1,8 @@
 #define SERVER_IP    "127.0.0.1"
 #define SERVER_PORT  6666 
-#define BUFFSIZE 10	// 传输大小  
+#define BUFFSIZE 4096	// 传输大小  
 
-#define FILE_PATH "./123.txt"
+#define FILE_PATH "image.jpg"
 
 #ifndef DEBUG  
 #define DEBUG false  
