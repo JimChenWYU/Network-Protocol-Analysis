@@ -31,7 +31,6 @@
 *.suo
 *.sdf
 *.ipch
-*.vcxproj
 *.filters
 *.user
 /**/Debug/
